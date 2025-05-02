@@ -1,6 +1,11 @@
 # HydraNet: Rilevamento di Aree Umide da Immagini Sentinel-2
 
-![Banner del progetto](https://via.placeholder.com/1200x400?text=HydraNet+Wetland+Detection)
+![Python](https://img.shields.io/badge/python-3.9%2B-blue)
+![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Release](https://img.shields.io/badge/version-1.0.0-blue)
+
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/BaterHub/HydraNet-Wetland-Detection/blob/main/Wetland_detection.ipynb)
 
 ## 📋 Panoramica
 
