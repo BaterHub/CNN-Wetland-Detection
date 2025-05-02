@@ -13,3 +13,4 @@ folium>=0.12.0
 rasterio>=1.2.0
 jupyter>=1.0.0
 ipykernel>=6.0.0
+segmentation-models-pytorch

@@ -1,4 +1,4 @@
-# HydraNet: Rilevamento di Aree Umide da Immagini Sentinel-2
+# Rilevamento di Aree Umide da Immagini Sentinel-2 con CNN (U-Net)
 
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue)
 ![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange)
@@ -9,7 +9,7 @@
 
 ## 📋 Panoramica
 
-Wetland_detection è un progetto di deep learning per il rilevamento automatico di aree umide (laghi, fiumi, bacini idrici). Utilizzando immagini multispettrali Sentinel-2 accessibili tramite Microsoft Planetary Computer il notebook implementa l'architettura di rete neurale specializzata per il riconoscimento di corpi idrici che integra l'analisi spettrale con tecniche di warning idrologico.
+Wetland_detection è un progetto di deep learning per il rilevamento automatico di aree umide (laghi, fiumi, bacini idrici). Utilizzando immagini multispettrali Sentinel-2 accessibili tramite Microsoft Planetary Computer il notebook implementa l'architettura di rete neurale specializzata per il riconoscimento di corpi idrici che integra l'analisi spettrale con tecniche di warning idrologico basati sugli indici NDWI (Normalized Difference Water Index) e MNDWI (Modified Normalized Difference Water Index).
 
 ### Caratteristiche principali:
 - 🛰️ Download automatico di immagini Sentinel-2 dall'API di Planetary Computer
