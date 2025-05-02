@@ -13,7 +13,7 @@ Wetland_detection è un progetto di deep learning per il rilevamento automatico 
 
 ### Caratteristiche principali:
 - 🛰️ Download automatico di immagini Sentinel-2 dall'API di Planetary Computer
-- 🧠 Implementazione di una rete neurale (HydraNet)
+- 🧠 Implementazione di una rete neurale (U-Net)
 - 💧 Utilizzo di indici idrici (NDWI, MNDWI) per migliorare il rilevamento
 - 🗺️ Output di mappe di probabilità e maschere binarie in formato GeoTIFF
 - 📊 Visualizzazione e quantificazione delle aree umide rilevate
@@ -94,7 +94,7 @@ Il notebook è organizzato in sezioni logiche e commentate:
 1. **Installazione delle dipendenze**: Setup iniziale dell'ambiente.
 2. **Connessione a Planetary Computer e ricerca di immagini**: Configurazione dell'accesso all'API e ricerca di scene Sentinel-2.
 3. **Download e preprocessing dell'immagine satellitare**: Acquisizione e preparazione dei dati.
-4. **Implementazione di HydraNet**: Definizione dell'architettura del modello.
+4. **Implementazione di U-Net**: Definizione dell'architettura del modello e download dei pesi pre-allenati.
 5. **Preprocessing e applicazione del modello**: Elaborazione dell'immagine e inferenza.
 6. **Visualizzazione e analisi dei risultati**: Rappresentazione grafica dei risultati.
 7. **Analisi quantitativa delle aree umide rilevate**: Calcolo di statistiche sulle aree rilevate.
@@ -111,7 +111,7 @@ lon_min, lat_min, lon_max, lat_max = 15.7, 40.0, 15.9, 40.2  # Esempio: Lago Sir
 
 ### Addestramento del modello
 
-⚠️ **Nota**: Il notebook attualmente utilizza un modello non addestrato poichè è rilasciato in fase di TEST. Per applicazioni reali, è necessario addestrare il modello con dati etichettati o utilizzare pesi pre-addestrati.
+⚠️ **Nota**: Il notebook attualmente utilizza un modello con pesi pre-addestrati.
 
 Per addestrare il modello su un dataset personalizzato, è necessario:
 1. Preparare un dataset di immagini Sentinel-2 con maschere binarie di riferimento per le aree umide
@@ -123,16 +123,16 @@ Un esempio di codice per l'addestramento sarà fornito in futuro.
 
 ## 🔍 Dettagli tecnici
 
-### Architettura HydraNet
+### Architettura CNN
 
-HydraNet è un'architettura di segmentazione semantica basata su U-Net con le seguenti caratteristiche distintive:
+L'architettura di segmentazione semantica è basata su U-Net con le seguenti caratteristiche:
 
-- **Backbone ResNet18**: Estrazione robusta di caratteristiche visive.
-- **Modulo di attenzione idrologica**: Combina indici d'acqua (NDWI, MNDWI) con caratteristiche CNN.
+- **Backbone ResNet34**: Estrazione robusta di caratteristiche visive.
+- **Modulo di warning idrologico**: Combina indici d'acqua (NDWI, MNDWI) con caratteristiche della CNN.
 - **Skip connections**: Preserva informazioni spaziali attraverso il downsampling/upsampling.
 
 <details>
-  <summary>Schema dell'architettura HydraNet</summary>
+  <summary>Schema dell'architettura U-Net</summary>
   
   ```
   Input Image [6 channels: B, G, R, NIR, SWIR1, SWIR2]
@@ -144,7 +144,7 @@ HydraNet è un'architettura di segmentazione semantica basata su U-Net con le se
      ↓                           ↓
   +-------------------+    +------------------+
   | Encoder Path       |    | Hydrological     |
-  | (Downsampling)     |    | Attention Module |
+  | (Downsampling)     |    | Warning Module   |
   +-------------------+    +------------------+
      ↓                           ↓
   +----------------------------------------+
@@ -185,7 +185,7 @@ graph TD
     C --> D[Download Sentinel-2 Bands]
     D --> E[Preprocess Image Data]
     E --> F[Compute Water Indices]
-    E --> G[Feed into HydraNet Model]
+    E --> G[Feed into U-Net Model]
     F --> G
     G --> H[Generate Water Probability Map]
     H --> I[Apply Threshold for Binary Mask]

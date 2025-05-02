@@ -13,15 +13,15 @@
 
 ## Panoramica
 
-La rete neurale è qui utilizzata per il rilevamento di aree umide da immagini satellitari multispettrali. Il modello combina un'architettura encoder-decoder di tipo U-Net con un modulo di attenzione idrologica che incorpora indici specifici (NDWI, MNDWI) per migliorare la precisione del rilevamento.
+La rete neurale U-Net è qui utilizzata per il rilevamento di aree umide da immagini satellitari multispettrali. Il modello combina un'architettura encoder-decoder di tipo U-Net con un modulo di attenzione idrologica che incorpora indici specifici (NDWI, MNDWI) per migliorare la precisione del rilevamento.
 
 ## Architettura Dettagliata
 
-L'architettura HydraNet è composta dai seguenti componenti principali:
+L'architettura U-Net è composta dai seguenti componenti principali:
 
 ### 1. Encoder
-- Backbone: ResNet18 pre-addestrato, modificato per accettare input a 6 canali (bande Sentinel-2)
-- Strati di encoding progressivamente più profondi che estraggono caratteristiche a diverse scale spaziali
+- Backbone: ResNet34 pre-addestrato, modificato per accettare input a 6 canali (bande Sentinel-2)
+- Strati di encoding progressivamente più profondi che estraggono caratteristiche a diverse scale spaziali (imagenet)
 
 ### 2. Decoder
 - Blocchi di upsampling e convoluzione che ricostruiscono la risoluzione spaziale originale
@@ -38,26 +38,6 @@ L'architettura HydraNet è composta dai seguenti componenti principali:
 - Attivazione sigmoide per normalizzare i valori di output tra 0 e 1
 
 ## Moduli Principali
-
-### HydraNetConvBlock
-```python
-class HydraNetConvBlock(nn.Module):
-    def __init__(self, in_channels, out_channels):
-        # Implementazione di un blocco convolutivo standard
-        # Due convoluzioni 3x3 con BatchNorm e ReLU
-```
-
-Questo modulo implementa un blocco convolutivo standard utilizzato sia nell'encoder che nel decoder, composto da due convoluzioni 3x3 seguite da normalizzazione batch e attivazione ReLU.
-
-### HydraNetUpBlock
-```python
-class HydraNetUpBlock(nn.Module):
-    def __init__(self, in_channels, out_channels):
-        # Implementazione di un blocco di upsampling
-        # Deconvoluzione + concatenazione con skip connection + blocco convolutivo
-```
-
-Questo modulo implementa un blocco di upsampling utilizzato nel decoder. Esegue una deconvoluzione per aumentare la risoluzione spaziale, concatena il risultato con una feature map dall'encoder (skip connection) e applica un blocco convolutivo.
 
 ### Compute Water Indices
 ```python
@@ -77,7 +57,7 @@ Questa funzione calcola gli indici d'acqua NDWI e MNDWI direttamente dalle bande
    - Calcolo degli indici d'acqua NDWI e MNDWI
 
 3. **Encoder**:
-   - Estrazione di caratteristiche attraverso il backbone ResNet
+   - Estrazione di caratteristiche attraverso il backbone U-Net
    - Generazione di feature maps a diverse risoluzioni
 
 4. **Decoder**:
@@ -93,36 +73,7 @@ Questa funzione calcola gli indici d'acqua NDWI e MNDWI direttamente dalle bande
 
 ## Addestramento
 
-### Dataset
-
-Per addestrare efficacemente HydraNet, è necessario un dataset con le seguenti caratteristiche:
-
-- **Input**: Immagini Sentinel-2 con 6 bande (B, G, R, NIR, SWIR1, SWIR2)
-- **Target**: Maschere binarie che indicano la presenza di acqua
-- **Dimensioni consigliate**: Almeno 1000 coppie immagine-maschera per risultati robusti
-- **Diversità**: Varietà di tipi di acqua (laghi, fiumi, bacini artificiali) e condizioni ambientali
-
-### Funzione di Loss
-
-La funzione di loss raccomandata è una combinazione di:
-
-- **Binary Cross-Entropy (BCE)**: Per la classificazione pixel-wise
-- **Dice Loss**: Per gestire lo sbilanciamento delle classi (l'acqua spesso occupa una piccola porzione dell'immagine)
-
-```python
-def combined_loss(y_pred, y_true):
-    bce = F.binary_cross_entropy(y_pred, y_true)
-    dice = 1 - (2 * (y_pred * y_true).sum() + 1e-5) / (y_pred.sum() + y_true.sum() + 1e-5)
-    return 0.5 * bce + 0.5 * dice
-```
-
-### Parametri di Training
-
-- **Ottimizzatore**: Adam con learning rate iniziale di 1e-4
-- **Scheduler**: ReduceLROnPlateau per ridurre il learning rate quando la loss si stabilizza
-- **Batch size**: 8-16, a seconda della memoria GPU disponibile
-- **Epoche**: 50-100, con early stopping basato sulla validation loss
-- **Data augmentation**: Rotazioni, flips, variazioni di luminosità e contrasto
+I pesi pre-allenati sono scaricati da pytorch
 
 ## Inferenza
 
@@ -143,9 +94,7 @@ Per l'inferenza, il modello segue questi passaggi:
 ## Requisiti Computazionali
 
 - **Addestramento**:
-  - GPU con almeno 8GB di VRAM
-  - 16GB+ di RAM del sistema
-  - Tempo di addestramento stimato: 8-24 ore su una singola GPU moderna
+in questa versione vengono scaricati i pesi da pytorch
 
 - **Inferenza**:
   - GPU con 4GB+ di VRAM per immagini di dimensioni standard

@@ -1,4 +1,4 @@
-# Contribuire al progetto di utilizzo del modello HydraNet per riconoscere le aree umide da immagini Sentinel-2
+# Contribuire al progetto di utilizzo di un modello CNN per riconoscere le aree umide da immagini Sentinel-2
 
 ## 📋 Indice
 
