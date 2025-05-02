@@ -5,7 +5,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Release](https://img.shields.io/badge/version-1.0.0-blue)
 
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/BaterHub/HydraNet-Wetland-Detection/blob/main/Wetland_detection.ipynb)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/BaterHub/CNN-Wetland-detection/blob/main/Wetland_detection.ipynb)
 
 ## 📋 Panoramica
 
@@ -48,7 +48,7 @@ pip install -r requirements.txt
 ```
 ├── README.md                       # Documentazione principale
 ├── requirements.txt                # Requisiti Python
-├── HydraNet_Wetland_Detection.ipynb # Notebook principale
+├── Wetland_Detection.ipynb         # Notebook principale
 ├── data/                           # Directory per i dati (vuota, verrà riempita dal notebook)
 ├── outputs/                        # Directory per i risultati (vuota, verrà riempita dal notebook)
 ├── docs/                           # Documentazione aggiuntiva
@@ -60,8 +60,8 @@ pip install -r requirements.txt
 ### 1. Clona il repository
 
 ```bash
-git clone https://github.com/username/hydranet-wetland-detection.git
-cd hydranet-wetland-detection
+git clone https://github.com/username/CNN-Wetland-detection.git
+cd CNN-Wetland-detection
 ```
 
 ### 2. Crea un ambiente virtuale (opzionale ma consigliato)
@@ -85,7 +85,7 @@ pip install -r requirements.txt
 jupyter notebook
 ```
 
-### 5. Apri il notebook `HydraNet_Wetland_Detection.ipynb` e segui le istruzioni
+### 5. Apri il notebook `Wetland_Detection.ipynb` e segui le istruzioni
 
 ## 📖 Come utilizzare il notebook
 
@@ -199,7 +199,7 @@ graph TD
 Se utilizzi questo progetto nella tua ricerca, per favore cita:
 
 ```
-@software{hydranet_wetland_detection,
+@software{CNN_wetland_detection,
   author = {Patrizio Petricca},
   title = {Rilevamento di Aree Umide da Immagini Sentinel-2},
   year = {2025},
