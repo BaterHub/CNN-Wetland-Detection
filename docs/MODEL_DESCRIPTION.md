@@ -1,4 +1,4 @@
-# HydraNet: Architettura e Implementazione Tecnica
+# Architettura e Implementazione Tecnica
 
 ## Indice
 - [Panoramica](#panoramica)
@@ -13,9 +13,7 @@
 
 ## Panoramica
 
-HydraNet è un'architettura di rete neurale progettata specificamente per il rilevamento di aree umide da immagini satellitari multispettrali. Il modello combina un'architettura encoder-decoder di tipo U-Net con un modulo di attenzione idrologica che incorpora indici d'acqua specializzati (NDWI, MNDWI) per migliorare la precisione del rilevamento.
-
-La caratteristica distintiva di HydraNet è l'integrazione diretta della conoscenza idrologica nella struttura della rete attraverso un meccanismo di attenzione che si concentra sulle caratteristiche spettrali tipiche dell'acqua.
+La rete neurale è qui utilizzata per il rilevamento di aree umide da immagini satellitari multispettrali. Il modello combina un'architettura encoder-decoder di tipo U-Net con un modulo di attenzione idrologica che incorpora indici specifici (NDWI, MNDWI) per migliorare la precisione del rilevamento.
 
 ## Architettura Dettagliata
 
@@ -29,15 +27,15 @@ L'architettura HydraNet è composta dai seguenti componenti principali:
 - Blocchi di upsampling e convoluzione che ricostruiscono la risoluzione spaziale originale
 - Skip connections che preservano informazioni spaziali dall'encoder
 
-### 3. Modulo di Attenzione Idrologica
+### 3. Modulo di Rilevamento Idrologico
 - Calcolo di indici d'acqua (NDWI, MNDWI) direttamente dall'input multispettrale
 - Elaborazione degli indici attraverso convoluzioni dedicate
-- Fusione delle caratteristiche degli indici come mappe di attenzione
-- Applicazione dell'attenzione alle caratteristiche del decoder
+- Fusione delle caratteristiche degli indici come mappe di warning
+- Applicazione del warning alle caratteristiche del decoder
 
 ### 4. Strato di Output
 - Convoluzione finale che produce una mappa di probabilità a singolo canale
-- Attivazione sigmoid per normalizzare i valori di output tra 0 e 1
+- Attivazione sigmoide per normalizzare i valori di output tra 0 e 1
 
 ## Moduli Principali
 

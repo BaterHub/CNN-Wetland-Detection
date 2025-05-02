@@ -9,11 +9,11 @@
 
 ## 📋 Panoramica
 
-HydraNet è un progetto di deep learning per il rilevamento automatico di aree umide (laghi, fiumi, bacini idrici). Utilizzando immagini multispettrali Sentinel-2 accessibili tramite Microsoft Planetary Computer il notebook implementa l'architettura di rete neurale specializzata per il riconoscimento di corpi idrici che integra l'analisi spettrale con tecniche di attenzione idrologica.
+Wetland_detection è un progetto di deep learning per il rilevamento automatico di aree umide (laghi, fiumi, bacini idrici). Utilizzando immagini multispettrali Sentinel-2 accessibili tramite Microsoft Planetary Computer il notebook implementa l'architettura di rete neurale specializzata per il riconoscimento di corpi idrici che integra l'analisi spettrale con tecniche di warning idrologico.
 
 ### Caratteristiche principali:
 - 🛰️ Download automatico di immagini Sentinel-2 dall'API di Planetary Computer
-- 🧠 Implementazione di HydraNet, rete neurale con attenzione idrologica
+- 🧠 Implementazione di una rete neurale (HydraNet)
 - 💧 Utilizzo di indici idrici (NDWI, MNDWI) per migliorare il rilevamento
 - 🗺️ Output di mappe di probabilità e maschere binarie in formato GeoTIFF
 - 📊 Visualizzazione e quantificazione delle aree umide rilevate
@@ -106,12 +106,12 @@ Per modificare l'area geografica di analisi, aggiorna le coordinate dell'Area di
 
 ```python
 # Definiamo un'area di interesse (AOI)
-lon_min, lat_min, lon_max, lat_max = 10.6, 45.5, 10.9, 45.9  # Esempio: Lago di Garda, Italia
+lon_min, lat_min, lon_max, lat_max = 15.7, 40.0, 15.9, 40.2  # Esempio: Lago Sirino, Italia
 ```
 
 ### Addestramento del modello
 
-⚠️ **Nota**: Il notebook attualmente utilizza un modello non addestrato per scopi dimostrativi. Per applicazioni reali, è necessario addestrare il modello con dati etichettati o utilizzare pesi pre-addestrati.
+⚠️ **Nota**: Il notebook attualmente utilizza un modello non addestrato poichè è rilasciato in fase di TEST. Per applicazioni reali, è necessario addestrare il modello con dati etichettati o utilizzare pesi pre-addestrati.
 
 Per addestrare il modello su un dataset personalizzato, è necessario:
 1. Preparare un dataset di immagini Sentinel-2 con maschere binarie di riferimento per le aree umide
@@ -120,17 +120,6 @@ Per addestrare il modello su un dataset personalizzato, è necessario:
 4. Monitorare le metriche di addestramento (es. IoU, F1-score)
 
 Un esempio di codice per l'addestramento sarà fornito in futuro.
-
-## 📊 Esempi di output
-
-Ecco alcuni esempi di output generati dal notebook:
-
-| Descrizione | Immagine |
-|-------------|----------|
-| Immagine RGB Sentinel-2 | ![RGB](https://via.placeholder.com/400x400?text=RGB+Image) |
-| Indice NDWI | ![NDWI](https://via.placeholder.com/400x400?text=NDWI) |
-| Mappa di probabilità | ![Probability](https://via.placeholder.com/400x400?text=Probability+Map) |
-| Maschera delle aree umide | ![Mask](https://via.placeholder.com/400x400?text=Water+Mask) |
 
 ## 🔍 Dettagli tecnici
 
@@ -211,10 +200,10 @@ Se utilizzi questo progetto nella tua ricerca, per favore cita:
 
 ```
 @software{hydranet_wetland_detection,
-  author = {Your Name},
-  title = {HydraNet: Rilevamento di Aree Umide da Immagini Sentinel-2},
+  author = {Patrizio Petricca},
+  title = {Rilevamento di Aree Umide da Immagini Sentinel-2},
   year = {2025},
-  url = {https://github.com/username/hydranet-wetland-detection}
+  url = {https://github.com/BaterHub/HydraNet-Wetland-Detection}
 }
 ```
 
@@ -235,4 +224,4 @@ I contributi sono benvenuti! Per favore, leggi `CONTRIBUTING.md` per le linee gu
 
 ## 📧 Contatti
 
-Per domande o suggerimenti, contattare [your.email@example.com](mailto:your.email@example.com) o aprire un Issue su GitHub.
+Per domande o suggerimenti, contattare [patrizio.petricca@yahoo.it](mailto:patrizio.petricca@yahoo.it) o aprire un Issue su GitHub.
